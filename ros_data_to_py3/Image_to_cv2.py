@@ -28,24 +28,11 @@ def image_callback(image):
     image_pub.publish(ros_img)
     print('img_pubed')
 
-def pc2_callback(pc2data):
-    #pc2->np
-    np_array=numpify(pc2data,squeeze=True)
-    #np->pc2
-    pc2_msg=msgify(PointCloud2,np_array,frame_id='laser_link')
-    pc2_pub.publish(pc2_msg)
-    print('cloud_pubed')
-
 if __name__ == '__main__':
     rospy.init_node('convert')
-    
     image_topic = "/usb_cam/image_raw"
-    pc2_topic = "/lslidar_point_cloud"
 
     rospy.Subscriber(image_topic, Image, image_callback, queue_size=1, buff_size=52428800)
-    rospy.Subscriber(pc2_topic, PointCloud2, pc2_callback,queue_size=1,buff_size=52428800)
 
     image_pub = rospy.Publisher('/ros_numpy_img_out', Image, queue_size=1)
-    pc2_pub = rospy.Publisher('/ros_numpy_pc2_out', PointCloud2, queue_size=1)
-
     rospy.spin()
