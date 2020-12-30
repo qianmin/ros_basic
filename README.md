@@ -13,12 +13,13 @@ then process
 then change pcl(python)_to_pc2
 then pub
 ```
-# 2:
+# 2:Image_to_cv2_to_Image
 ```
-in this node,we change
+in ros_to_cv2.py
+we change
 Image->cv2Img
-PointCloud2->np
-and
+process
+then
 cv2Img->ROSImage
-np->PointCloud2
+pub
 ```
